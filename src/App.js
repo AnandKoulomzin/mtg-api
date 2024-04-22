@@ -1,5 +1,4 @@
 // Filename - App.js
-
 import React from "react";
 import Navbar from "./components/Navbar";
 import {
@@ -12,7 +11,7 @@ import About from "./pages/about";
 import Blogs from "./pages/blogs";
 import SignUp from "./pages/signup";
 import Contact from "./pages/contact";
-
+ 
 function App() {
 	return (
 		<Router>
