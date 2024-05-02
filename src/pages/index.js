@@ -1,50 +1,41 @@
-import React, { useState, useEffect } from "react";
+// Home.js
+import React, { useState } from "react";
+import styled from "styled-components"; 
+
+
 
 function Home() {
-    const [items, setItems] = useState([]);
-    const [dataLoaded, setDataLoaded] = useState(false);
+    const [selectedSet, setSelectedSet] = useState(""); 
+    const handleSetSelect = (event) => {
+        setSelectedSet(event.target.value);
+    };
 
-    useEffect(() => {
-        fetch("https://jsonplaceholder.typicode.com/users")
-            .then((res) => res.json())
-            .then((json) => {
-                setItems(json);
-                setDataLoaded(true);
-            });
-    }, []); 
-
-    if (!dataLoaded) {
-        return (
-            <div>
-                <h1>Please wait some time....</h1>
-            </div>
-        );
-    }
+    const generateBoosterPack = () => {
+        if (selectedSet) {
+            
+            window.location.href = `/Pack/${selectedSet}`;
+        }
+    };
 
     return (
-        <div className="App">
-            <h1 className="geeks">GeeksforGeeks</h1>
-            <h3>Fetch data from an api in react</h3>
-            <div className="container">
-                {items.map((item) => (
-                    <div className="item" key={item.id}>
-                        <ol>
-                            <div>
-                                <strong>User_Name: </strong>
-                                {item.username},
-                            </div>
-                            <div>
-                                Full_Name: {item.name},
-                            </div>
-                            <div>
-                                User_Email: {item.email}
-                            </div>
-                        </ol>
-                    </div>
-                ))}
-            </div>
+        <div>
+            <h1>Magic The Gathering Booster Pack Generater</h1>
+            <t1>Select a Magic: The Gathering set: </t1>
+            <select value={selectedSet} onChange={handleSetSelect}>
+                <option value="">-- Select Set --</option>
+                <option value="eld">Throne of Eldraine</option>
+                <option value="mid">Innistrad: Midnight Hunt</option>
+                <option value="vow">Innistrad: Crimson Vow</option>
+                <option value="neo">Kamigawa: Neon Dynasty</option>
+                <option value="snc">Streets of New Capenna</option>
+                <option value="dmu">Dominaria United</option>
+                <option value="brr">The Brothers' War</option>
+                <option value="one">Phyrexia: All Will Be One</option>
+                <option value="mom">March of the Machine</option>
+            </select>
+            <button onClick={generateBoosterPack}>Generate Booster Pack</button>
         </div>
     );
 }
-
+//selects the set and then routes to pack page
 export default Home;
